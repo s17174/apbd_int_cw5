@@ -18,7 +18,7 @@ namespace apbd_int_cw5.Controllers
         public IActionResult GetStudents()
 
         {
-            List<Student> list = studentsDB.getStudentsFromDb();
+            List<Student> list = studentsDB.GetStudentsFromDb();
             return Ok(list);
         }
 
@@ -59,7 +59,7 @@ namespace apbd_int_cw5.Controllers
         [HttpGet("getSemester/{id}")]
         public IActionResult GetSemestrByIndex(string id)
         {
-            Semester sem = studentsDB.getSemester(id);
+            Semester sem = studentsDB.GetSemester(id);
             return Ok(sem);
         }
 

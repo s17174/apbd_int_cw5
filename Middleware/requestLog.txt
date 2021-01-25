@@ -1,0 +1,76 @@
+﻿METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: 
+
+METHOD: GET
+QUERY: 
+BODY: {
+	"idStudent" : 1,
+	"firstName": "Adam",
+	"lastName" : "Kowalski"
+}
+
+METHOD: GET
+QUERY: 
+BODY: {
+	"idStudent" : 1,
+	"firstName": "Adam",
+	"lastName" : "Kowalski"
+}
+
+METHOD: GET
+QUERY: 
+BODY: {
+	"idStudent" : 1,
+	"firstName": "Adam",
+	"lastName" : "Kowalski"
+}
+
+METHOD: GET
+QUERY: 
+BODY: {
+	"idStudent" : 1,
+	"firstName": "Adam",
+	"lastName" : "Kowalski"
+}
+

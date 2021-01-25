@@ -1,16 +1,13 @@
 ﻿using apbd_int_cw5.Models;
-using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace apbd_int_cw5.Services
 {
-        public class StudentDbService : IStudentDbInterface
+    public class StudentDbService : IStudentDbInterface
         {
 
-            public List<Student> getStudentsFromDb()
+            public List<Student> GetStudentsFromDb()
             {
                 List<Student> StudentsList = new List<Student>();
                 using (var client = new SqlConnection(SqlUtils.SqlUtils.DB_ADDRESS))
@@ -37,7 +34,7 @@ namespace apbd_int_cw5.Services
                 return StudentsList;
             }
 
-            public Semester getSemester(string id)
+            public Semester GetSemester(string id)
             {
                 var sem = new Semester();
                 using (var client = new SqlConnection(SqlUtils.SqlUtils.DB_ADDRESS))
@@ -56,5 +53,19 @@ namespace apbd_int_cw5.Services
                 }
                 return sem;
             }
+
+        public bool TrueStudent(string indexNumber)
+        {
+            using SqlConnection con = new SqlConnection(SqlUtils.SqlUtils.DB_ADDRESS);
+            using SqlCommand com = new SqlCommand
+            {
+                Connection = con,
+                CommandText = SqlUtils.SqlUtils.DB_SELECT_FRIST_NAME_FROM_STUDENT
+            };
+            com.Parameters.AddWithValue("index", indexNumber);
+            con.Open();
+            SqlDataReader dr = com.ExecuteReader();
+            return dr.Read();
         }
+    }
 }

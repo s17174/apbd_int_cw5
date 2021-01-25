@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using apbd_int_cw5.Middleware;
 using apbd_int_cw5.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace apbd_int_cw5
 {
@@ -37,6 +33,28 @@ namespace apbd_int_cw5
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseMiddleware<LoggingMiddleware>();
+            app.Use(async (context, next) => {
+                if (!context.Request.Headers.ContainsKey("Index"))
+                {
+                    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                    await context.Response.WriteAsync("ERROR [Middleware]: Nie podano numeru indexu");
+                    return;
+                }
+
+                var index = context.Request.Headers["Index"].ToString();
+
+                StudentDbService trueStudent = new StudentDbService();
+
+                if (!trueStudent.TrueStudent(index))
+                {
+                    context.Response.StatusCode = StatusCodes.Status404NotFound;
+                    await context.Response.WriteAsync("Brak indexu w bazie");
+                    return;
+                }
+                await next();
+            });
 
             app.UseRouting();
 

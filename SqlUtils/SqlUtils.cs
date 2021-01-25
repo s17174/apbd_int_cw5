@@ -60,6 +60,11 @@
             "SELECT * " +
             "FROM Enrollment " +
             "WHERE IdEnrollment = @IdEnrollment";
+
+        public static string DB_SELECT_FRIST_NAME_FROM_STUDENT =
+            "SELECT FirstName " +
+            "FROM Student " +
+            "WHERE IndexNumber = @index";
     }
 
 }
