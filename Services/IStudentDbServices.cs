@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace apbd_int_cw5.Services
 {
-    interface IStudentDbInterface
+    interface IStudentDbServices
     {
         List<Student> GetStudentsFromDb();
         Semester GetSemester(string id);

@@ -1,11 +1,14 @@
 using apbd_int_cw5.Middleware;
 using apbd_int_cw5.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace apbd_int_cw5
 {
@@ -24,6 +27,20 @@ namespace apbd_int_cw5
             services.AddSingleton<IEnrollmentDbServices, EnrollmentDbServices>();
          
             services.AddControllers();
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+              .AddJwtBearer(options =>
+              {
+                  options.TokenValidationParameters = new TokenValidationParameters
+                  {
+                      ValidateIssuer = true,
+                      ValidateAudience = true,
+                      ValidateLifetime = true,
+                      ValidIssuer = "s17174",
+                      ValidAudience = "employee",
+                      IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["SecretKey"]))
+                  };
+              });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,7 +50,7 @@ namespace apbd_int_cw5
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            /*
             app.UseMiddleware<LoggingMiddleware>();
             app.Use(async (context, next) => {
                 if (!context.Request.Headers.ContainsKey("Index"))
@@ -54,9 +71,11 @@ namespace apbd_int_cw5
                     return;
                 }
                 await next();
-            });
+            });*/
 
             app.UseRouting();
+
+            app.UseAuthorization();
 
             app.UseAuthorization();
 

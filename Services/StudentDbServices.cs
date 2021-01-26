@@ -4,7 +4,7 @@ using System.Data.SqlClient;
 
 namespace apbd_int_cw5.Services
 {
-    public class StudentDbService : IStudentDbInterface
+    public class StudentDbServices : IStudentDbServices
         {
 
             public List<Student> GetStudentsFromDb()

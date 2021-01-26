@@ -157,5 +157,31 @@ namespace apbd_int_cw5.Services
                 }
                 return resp;
             }
+
+        public Student GetStudentPassword(string index)
+        {
+            var student = new Student();
+
+            using (var connection = new SqlConnection(SqlUtils.SqlUtils.DB_ADDRESS))
+            using (var command = new SqlCommand())
+            {
+                command.Connection = connection;
+                command.CommandText = SqlUtils.SqlUtils.DB_SELECT_ALL_FROM_STUDENTS_BY_INDEX_NUMBER;
+                command.Parameters.AddWithValue("@IndexNumber", index);
+
+                connection.Open();
+
+                var dr = command.ExecuteReader();
+
+                if (!dr.Read())
+                {
+                    return null;
+                }
+                student.IndexNumber = dr["IndexNumber"].ToString();
+                student.Password = dr["Password"].ToString();
+
+            }
+            return student;
         }
+    }
 }

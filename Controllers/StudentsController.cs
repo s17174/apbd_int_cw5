@@ -12,7 +12,7 @@ namespace apbd_int_cw5.Controllers
     public class StudentsController : ControllerBase
     {
 
-        private readonly IStudentDbInterface studentsDB = new StudentDbService();
+        private readonly IStudentDbServices studentsDB = new StudentDbServices();
 
         [HttpGet]
         public IActionResult GetStudents()
